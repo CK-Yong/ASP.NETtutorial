@@ -1,43 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using ASP.NETtutorial.Models;
-using Microsoft.Ajax.Utilities;
 
 namespace ASP.NETtutorial.Controllers
 {
     public class MoviesController : Controller
     {
-        private MovieDBContext db = new MovieDBContext();
+        private readonly MovieDBContext db = new MovieDBContext();
 
         // GET: Movies
         public ActionResult Index(string searchString, string movieGenre)
         {
             var movies = from m in db.Movies
-                         select m;
+                select m;
 
             var genreList = new List<string>();
             var queryGenresInDb = from d in db.Movies
-                                  orderby d.Genre
-                                  select d.Genre;
+                orderby d.Genre
+                select d.Genre;
 
             genreList.AddRange(queryGenresInDb.Distinct());
             ViewBag.movieGenre = new SelectList(genreList);
 
             if (!string.IsNullOrEmpty(searchString))
-            {
                 movies = movies.Where(s => s.Title.Contains(searchString));
-            }
 
             if (!string.IsNullOrEmpty(movieGenre))
-            {
                 movies = movies.Where(x => x.Genre == movieGenre);
-            }
 
             return View(movies);
         }
@@ -46,14 +38,10 @@ namespace ASP.NETtutorial.Controllers
         public ActionResult Details(int? id)
         {
             if (id == null)
-            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Movie movie = db.Movies.Find(id);
+            var movie = db.Movies.Find(id);
             if (movie == null)
-            {
                 return HttpNotFound();
-            }
             return View(movie);
         }
 
@@ -84,14 +72,10 @@ namespace ASP.NETtutorial.Controllers
         public ActionResult Edit(int? id)
         {
             if (id == null)
-            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Movie movie = db.Movies.Find(id);
+            var movie = db.Movies.Find(id);
             if (movie == null)
-            {
                 return HttpNotFound();
-            }
             return View(movie);
         }
 
@@ -115,23 +99,20 @@ namespace ASP.NETtutorial.Controllers
         public ActionResult Delete(int? id)
         {
             if (id == null)
-            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Movie movie = db.Movies.Find(id);
+            var movie = db.Movies.Find(id);
             if (movie == null)
-            {
                 return HttpNotFound();
-            }
             return View(movie);
         }
 
         // POST: Movies/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
+        [ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Movie movie = db.Movies.Find(id);
+            var movie = db.Movies.Find(id);
             db.Movies.Remove(movie);
             db.SaveChanges();
             return RedirectToAction("Index");
@@ -140,9 +121,7 @@ namespace ASP.NETtutorial.Controllers
         protected override void Dispose(bool disposing)
         {
             if (disposing)
-            {
                 db.Dispose();
-            }
             base.Dispose(disposing);
         }
     }

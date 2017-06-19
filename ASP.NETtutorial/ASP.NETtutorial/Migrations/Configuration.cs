@@ -1,13 +1,10 @@
+using System;
+using System.Data.Entity.Migrations;
 using ASP.NETtutorial.Models;
 
 namespace ASP.NETtutorial.Migrations
 {
-    using System;
-    using System.Data.Entity;
-    using System.Data.Entity.Migrations;
-    using System.Linq;
-
-    internal sealed class Configuration : DbMigrationsConfiguration<ASP.NETtutorial.Models.MovieDBContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<MovieDBContext>
     {
         public Configuration()
         {
@@ -15,7 +12,7 @@ namespace ASP.NETtutorial.Migrations
             ContextKey = "ASP.NETtutorial.Models.MovieDBContext";
         }
 
-        protected override void Seed(ASP.NETtutorial.Models.MovieDBContext context)
+        protected override void Seed(MovieDBContext context)
         {
             context.Movies.AddOrUpdate(i => i.Title,
                 new Movie
@@ -25,7 +22,6 @@ namespace ASP.NETtutorial.Migrations
                     Genre = "Romantic Comedy",
                     Price = 7.99M
                 },
-
                 new Movie
                 {
                     Title = "Ghostbusters ",
@@ -33,7 +29,6 @@ namespace ASP.NETtutorial.Migrations
                     Genre = "Comedy",
                     Price = 8.99M
                 },
-
                 new Movie
                 {
                     Title = "Ghostbusters 2",
@@ -41,7 +36,6 @@ namespace ASP.NETtutorial.Migrations
                     Genre = "Comedy",
                     Price = 9.99M
                 },
-
                 new Movie
                 {
                     Title = "Rio Bravo",

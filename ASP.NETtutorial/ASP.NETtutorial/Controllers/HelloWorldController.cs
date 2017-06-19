@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Web;
 using System.Web.Mvc;
 
 namespace ASP.NETtutorial.Controllers
@@ -27,7 +24,9 @@ namespace ASP.NETtutorial.Controllers
             string lastName = "Not defined",
             string job = "unemployed")
         {
-            var response = HttpUtility.HtmlEncode($"Hello, number {firstName}. Your last name is: {lastName}. You are currently a: {job}");
+            var response =
+                HttpUtility.HtmlEncode(
+                    $"Hello, number {firstName}. Your last name is: {lastName}. You are currently a: {job}");
             return response;
         }
 
@@ -35,7 +34,9 @@ namespace ASP.NETtutorial.Controllers
             string lastName = "Not defined",
             string job = "unemployed")
         {
-            var response = HttpUtility.HtmlEncode($"Hello, number {id}. Your last name is: {lastName}. You are currently a: {job}");
+            var response =
+                HttpUtility.HtmlEncode(
+                    $"Hello, number {id}. Your last name is: {lastName}. You are currently a: {job}");
             return response;
         }
     }

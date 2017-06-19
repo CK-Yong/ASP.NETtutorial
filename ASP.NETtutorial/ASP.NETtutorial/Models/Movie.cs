@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
-using System.Linq;
-using System.Web;
 
 namespace ASP.NETtutorial.Models
 {
@@ -25,9 +21,10 @@ namespace ASP.NETtutorial.Models
         [StringLength(30)]
         public string Genre { get; set; }
 
-        [Range(1,100)]
+        [Range(1, 100)]
         [DataType(DataType.Currency)]
         public decimal Price { get; set; }
+
         [StringLength(5)]
         [RegularExpression(@"^[A-Z]+[a-z A-Z'''-'\s]*$")]
         public string Rating { get; set; }
